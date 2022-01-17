@@ -4,6 +4,8 @@ import api from './services/api';
 import './App.css';
 
 import Header from './components/Header';
+import backgroundImage from "./assets/background.jpg";
+
 
 
 /**
@@ -44,6 +46,7 @@ setProjects([ ... projects, project]);
 }
 return  (
      <>
+     <img src={backgroundImage} />
     <Header title="Projetos "/>
 
     <ul>
