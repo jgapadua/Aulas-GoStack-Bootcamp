@@ -1,0 +1,12 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space # windows e linux entendem o final da linha da mesma forma
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true  # tira os espaços no fim da linha
+insert_final_newline = true  # adiciona uma linha no fim do arquivo
+end_of_line = lf
