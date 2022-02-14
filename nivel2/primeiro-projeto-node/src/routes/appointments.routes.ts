@@ -6,6 +6,8 @@ import AppointmentsRepository from '../repositories/AppointmentsRepository';
 const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
 
+
+
 appointmentsRouter.get('/',(request, response)=>{
   const apppointments= appointmentsRepository.all();
 
@@ -27,7 +29,10 @@ appointmentsRouter.post('/', (request, response)=>{
     .json({message:'This appointment is already booked'});
   }
 
-const appointment= appointmentsRepository.create(provider,parsedDate);
+const appointment= appointmentsRepository.create({
+  provider,
+  date: parsedDate,
+});
 
   return response.json(appointment);
 });
