@@ -9,4 +9,4 @@ indent_size = 2
 charset = utf-8
 trim_trailing_whitespace = true  # tira os espaços no fim da linha
 insert_final_newline = true  # adiciona uma linha no fim do arquivo
-end_of_line = lf
+end_of_line = lf # garante que as quebras de linha sejam padronizadas
