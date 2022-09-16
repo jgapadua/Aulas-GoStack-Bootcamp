@@ -13,8 +13,8 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   width: 100%;
   max-width: 700px;
@@ -33,7 +33,7 @@ export const Content = styled.div`
       display: block;
       margin-top: 24px;
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.3s;
 
       &:hover {
         color: ${shade(0.2, '#f4ede8')};
@@ -43,20 +43,21 @@ export const Content = styled.div`
 
   > a {
     color: #f4ede8;
-    display: block;
-    margin-top: 24px;
     text-decoration: none;
     transition: color 0.2s;
+    margin-top: 24px;
+    display: block;
 
     display: flex;
     align-items: center;
 
     svg {
+      color: #f4ede8;
       margin-right: 16px;
     }
 
     &:hover {
-      color: ${shade(0.2, '#F4EDE8')};
+      color: ${shade(0.2, '#f4ede8')};
     }
   }
 `;
