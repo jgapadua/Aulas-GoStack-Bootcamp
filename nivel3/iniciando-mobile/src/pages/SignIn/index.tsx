@@ -16,7 +16,6 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
 import { useAuth } from '../../hooks/auth';
-
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -46,7 +45,7 @@ const SignIn: React.FC = () => {
 
   const { signIn } = useAuth();
 
-  const handleSignIn = useCallback(
+  const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       try {
         formRef.current?.setErrors({});
@@ -69,8 +68,6 @@ const SignIn: React.FC = () => {
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
-
-          console.log(errors);
 
           formRef.current?.setErrors(errors);
 
@@ -104,7 +101,7 @@ const SignIn: React.FC = () => {
               <Title>Faça seu login</Title>
             </View>
 
-            <Form ref={formRef} onSubmit={handleSignIn}>
+            <Form ref={formRef} onSubmit={handleSubmit}>
               <Input
                 autoCorrect={false}
                 autoCapitalize="none"

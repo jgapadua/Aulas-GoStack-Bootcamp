@@ -6,18 +6,12 @@ import React, {
   useEffect,
 } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import api from '../services/api';
 
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  avatar_url: string;
-}
+import api from '../services/api';
 
 interface AuthState {
   token: string;
-  user: User;
+  user: object;
 }
 
 interface SignInCredentials {
@@ -26,7 +20,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: User;
+  user: object;
   loading: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
@@ -76,7 +70,7 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signOut = useCallback(async () => {
-    await AsyncStorage.multiRemove(['@GoBarber:user', '@GoBarber:token']);
+    await AsyncStorage.multiRemove(['@GoBarber:token', '@GoBarber:user']);
 
     setData({} as AuthState);
   }, []);

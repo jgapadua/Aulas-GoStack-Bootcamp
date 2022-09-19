@@ -10,12 +10,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
-import { Form } from '@unform/mobile';
-import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
-import api from '../../services/api';
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 
+import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -33,12 +33,12 @@ interface SignUpFormData {
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const navigation = useNavigation();
-
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
-  const handleSignUp = useCallback(
+  const navigation = useNavigation();
+
+  const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
       try {
         formRef.current?.setErrors({});
@@ -99,7 +99,7 @@ const SignUp: React.FC = () => {
               <Title>Crie sua conta</Title>
             </View>
 
-            <Form ref={formRef} onSubmit={handleSignUp}>
+            <Form ref={formRef} onSubmit={handleSubmit}>
               <Input
                 autoCapitalize="words"
                 name="name"
@@ -133,7 +133,9 @@ const SignUp: React.FC = () => {
                 placeholder="Senha"
                 textContentType="newPassword"
                 returnKeyType="send"
-                onSubmitEditing={() => formRef.current?.submitForm()}
+                onSubmitEditing={() => {
+                  formRef.current?.submitForm();
+                }}
               />
 
               <Button onPress={() => formRef.current?.submitForm()}>
