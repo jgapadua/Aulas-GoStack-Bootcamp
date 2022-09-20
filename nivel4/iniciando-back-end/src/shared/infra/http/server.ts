@@ -1,16 +1,15 @@
 import 'reflect-metadata';
-import 'dotenv/config';
 
 import express, { Request, Response, NextFunction } from 'express';
-import 'express-async-errors';
 import cors from 'cors';
-import routes from './shared/routes';
-import uploadConfig from './config/upload';
-import AppError from './errors/AppError';
+import 'express-async-errors';
 
-import createConnection from './shared/database';
+import uploadConfig from '@config/upload';
+import AppError from '@shared/errors/AppError';
+import routes from './routes';
 
-createConnection();
+import '@shared/infra/typeorm';
+
 const app = express();
 
 app.use(cors());
@@ -20,10 +19,9 @@ app.use(routes);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
-    return response.status(err.statusCode).json({
-      status: 'error',
-      message: err.message,
-    });
+    return response
+      .status(err.statusCode)
+      .json({ status: 'error', message: err.message });
   }
 
   console.error(err);
@@ -34,4 +32,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-export default app;
+app.listen(3333, () => {
+  console.log('🚀 Server started on port 3333!');
+});
