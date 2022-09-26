@@ -33,21 +33,48 @@ describe('AuthenticateUser', () => {
     expect(response.user).toEqual(user);
   });
 
-  /*   it('should not be able to authenticate a non-existing user', async () => {
+  it('should not be able to authenticate a non existing user', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
-    const authenticateUser = new AuthenticateUserService(fakeUsersRepository);
+    const fakeHashProvider = new FakeHashProvider();
 
-    await authenticateUser.execute({
+    const authenticateUser = new AuthenticateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+
+    expect(
+      authenticateUser.execute({
+        email: 'fulano@example.com',
+        password: '123456',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to authenticate with wrong password', async () => {
+    const fakeUsersRepository = new FakeUsersRepository();
+    const fakeHashProvider = new FakeHashProvider();
+
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+
+    const authenticateUser = new AuthenticateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
+
+    await createUser.execute({
+      name: 'Fulano',
       email: 'fulano@example.com',
       password: '123456',
     });
 
     expect(
-      createUser.execute({
-        name: 'Ciclano',
+      authenticateUser.execute({
         email: 'fulano@example.com',
-        password: '123456',
+        password: '1234567',
       }),
     ).rejects.toBeInstanceOf(AppError);
-  }); */
+  });
 });
