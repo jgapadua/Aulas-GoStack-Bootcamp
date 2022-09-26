@@ -8,14 +8,12 @@ describe('CreateAppointment', () => {
     const createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
-
     const appointment = await createAppointment.execute({
       date: new Date(),
       provider_id: '123123123',
     });
     expect(appointment).toHaveProperty('id');
     expect(appointment.provider_id).toBe('123123123');
-    expect(appointment.date).toEqual(new Date(2022, 8, 23, 16));
   });
 
   it('shouldn not be able to create two appointment on the same time', async () => {
@@ -23,7 +21,7 @@ describe('CreateAppointment', () => {
     const createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
-    const appointmentDate = new Date(2022, 8, 23, 18);
+    const appointmentDate = new Date(2022, 9, 26, 18);
 
     await createAppointment.execute({
       date: appointmentDate,
