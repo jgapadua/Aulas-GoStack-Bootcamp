@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
+import GetAllUsersService from '@modules/users/services/GetAllUsersService';
 
 class UsersController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -16,6 +17,14 @@ class UsersController {
     });
 
     delete user.password;
+
+    return res.json(user);
+  }
+
+  public async list(req: Request, res: Response): Promise<Response> {
+    const listUser = container.resolve(GetAllUsersService);
+    
+    const user = await listUser.execute();
 
     return res.json(user);
   }
