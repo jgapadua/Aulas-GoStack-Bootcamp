@@ -14,17 +14,17 @@ class UsersRepository implements IUsersRepository {
   }
 
   public async findById(id: string): Promise<User | undefined> {
-    const user = await this.ormRepository.findOne(id);
+    const findAppointment = await this.ormRepository.findOne(id);
 
-    return user;
+    return findAppointment;
   }
 
   public async findByEmail(email: string): Promise<User | undefined> {
-    const user = await this.ormRepository.findOne({
+    const findAppointment = await this.ormRepository.findOne({
       where: { email },
     });
 
-    return user;
+    return findAppointment;
   }
 
   public async findAllProviders({except_user_id}: IFindAllProvidersDTO): Promise<User[]> {
